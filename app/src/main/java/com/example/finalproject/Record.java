@@ -36,7 +36,12 @@ public class Record extends AppCompatActivity {
         });
         updateUI();
         Button summary = findViewById(R.id.summary);
-        summary.setOnClickListener(unused -> toSummary());
+        summary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toSummary();
+            }
+        });
     }
     /**
      *
@@ -161,5 +166,6 @@ public class Record extends AppCompatActivity {
         editor.putLong("electronics", Double.doubleToRawLongBits(elecSummary));
         editor.putLong("entertainment", Double.doubleToRawLongBits(entertainSummary));
         editor.putLong("others", Double.doubleToRawLongBits(othersSummary));
+        startActivity(intent);
     }
 }
