@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Final Project</string>
+    <string name="record">Record</string>
+    <string name="being_record">Being Record</string>
+    <string name="enter_item">Enter Item</string>
+    <string name="add">add</string>
+    <string name="textview">TextView</string>
+</resources>
