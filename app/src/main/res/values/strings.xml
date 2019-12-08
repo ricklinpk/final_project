@@ -8,6 +8,9 @@
     <string name="remove">Remove</string>
     <string name="add" />
     <string name="enter_item" />
+    <string name="record" />
+    <string name="summary">summary</string>
+    <string name="show_summary" />
     <string-array name="day_choice">
         <item>1</item>
         <item>2</item>

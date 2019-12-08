@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button recordButton = findViewById(R.id.beingRecord);
+        Button recordButton = findViewById(R.id.record);
         recordButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 // Change the label's tex
