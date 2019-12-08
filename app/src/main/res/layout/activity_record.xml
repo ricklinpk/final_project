@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
+        <EditText
             android:id="@+id/Item"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -57,20 +57,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/add_btn"
+            android:id="@+id/addItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/add" />
     </LinearLayout>
 
-    <ListView
+    <LinearLayout
         android:id="@+id/items_list"
+        android:orientation="horizontal"
         android:layout_marginBottom="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </ListView>
+    </LinearLayout>
 
 
 
