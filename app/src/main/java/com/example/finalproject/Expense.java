@@ -14,8 +14,31 @@ public final class Expense {
         amount = setAmount;
     }
 
-    public int getCategory() {
-        return category;
+    public String getCategory() {
+        String categoryStr = "";
+        switch (category){
+            case Constants.FOOD:
+                categoryStr = "FOOD";
+                break;
+            case Constants.TRANSPORTATION:
+                categoryStr = "TRANSPORTATION";
+                break;
+            case Constants.DRINK:
+                categoryStr = "DRINK";
+                break;
+            case Constants.ELECTRONICS:
+                categoryStr = "ELECTRONICS";
+                break;
+            case Constants.ENTERTAINMENT:
+                categoryStr = "ENTERTAINMENT";
+                break;
+            case Constants.OTHERS:
+                categoryStr = "OTHERS";
+                break;
+            default:
+                break;
+        }
+        return categoryStr;
     }
     public int getMonth() {
         return month;
@@ -41,5 +64,32 @@ public final class Expense {
     public void setItem(final String item) { this.item = item; }
     public void setMonth(final int month) {
         this.month = month;
+    }
+    public String toString() {
+        String categoryStr = "";
+        switch (category){
+            case Constants.FOOD:
+                categoryStr = "FOOD";
+                break;
+            case Constants.TRANSPORTATION:
+                categoryStr = "TRANSPORTATION";
+                break;
+            case Constants.DRINK:
+                categoryStr = "DRINK";
+                break;
+            case Constants.ELECTRONICS:
+                categoryStr = "ELECTRONICS";
+                break;
+            case Constants.ENTERTAINMENT:
+                categoryStr = "ENTERTAINMENT";
+                break;
+            case Constants.OTHERS:
+                categoryStr = "OTHERS";
+                break;
+            default:
+                break;
+        }
+        return Integer.toString(month) + " " + Integer.toString(day) + " " + categoryStr
+                + " " + item + " " + Double.toString(amount);
     }
 }

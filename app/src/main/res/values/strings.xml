@@ -11,6 +11,8 @@
     <string name="record" />
     <string name="summary">summary</string>
     <string name="show_summary" />
+    <string name="day">day</string>
+    <string name="button">Button</string>
     <string-array name="day_choice">
         <item>1</item>
         <item>2</item>
