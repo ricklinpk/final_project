@@ -4,13 +4,30 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/monthOfExpense"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:text="month" />
+    <TextView
+        android:id="@+id/dayOfExpense"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:text="day" />
+
+    <TextView
+        android:id="@+id/CategoryOfExpense"
+        android:layout_width="55dp"
+        android:layout_height="wrap_content"
+        android:text="category" />
+
+    <TextView
         android:id="@+id/nameOfExpense"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/nameOfExpense" />
+        android:text="item" />
     <TextView
         android:id="@+id/amount"
         android:layout_width="70dp"
@@ -18,23 +35,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/amount" />
-    <Spinner
-        android:id="@+id/CategoryOfExpense"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/category_choice" />
-    <Spinner
-        android:id="@+id/monthOfExpense"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/month_choice" />
-
-    <Spinner
-        android:id="@+id/dayOfExpense"
-        android:layout_width="55dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/day_choice" />
+        android:text="amount" />
 
     <Button
         android:id="@+id/removeItem"

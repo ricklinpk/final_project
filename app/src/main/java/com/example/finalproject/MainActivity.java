@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
                 openNewAct();
             }
         });
-        finish();
     }
     public void openNewAct() {
         // Change the label's text

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.view.PieChartView;
 
 public class Summary extends AppCompatActivity {
@@ -34,7 +33,8 @@ public class Summary extends AppCompatActivity {
         pieData.add(("food: " + food));
         pieData.add(("transportation: " + transportation));
         pieData.add(("drink: " + drink));
-        pieData.add(("electronics: " + electronics));
+        pieData.add(("electronics:" +
+                " " + electronics));
         pieData.add(("entertainment: " + entertainment));
         pieData.add(("others: " + others));
 

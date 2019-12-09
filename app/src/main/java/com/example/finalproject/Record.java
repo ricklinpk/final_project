@@ -21,9 +21,6 @@ public class Record extends AppCompatActivity {
     private static double foodSummary = 0, transSummary = 0, drinkSummary = 0, elecSummary = 0,
             entertainSummary = 0, othersSummary = 0;
     private List<Expense> expenseList;
-    private int monthInt, dayInt, categoryInt;
-    private double amount;
-    private String itemString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +28,7 @@ public class Record extends AppCompatActivity {
         setContentView(R.layout.activity_record);
         expenseList = new ArrayList<>();
         Button addItem = findViewById(R.id.addItem);
-        addItem.setOnClickListener(addNewInvitee -> {
+        addItem.setOnClickListener(addNewItem -> {
             addItem();
         });
         updateUI();
@@ -49,42 +46,44 @@ public class Record extends AppCompatActivity {
     private void addItem() {
         Spinner month = findViewById(R.id.Month), day = findViewById(R.id.Day),
                 category = findViewById(R.id.Category);
+        EditText newAmount = findViewById(R.id.Amount), newItem = findViewById(R.id.Item);
         String thisMonth = month.getSelectedItem().toString(),
                 thisDay = day.getSelectedItem().toString(),
-                thisCategory = category.getSelectedItem().toString();
-        EditText newItem = findViewById(R.id.Item);
-        itemString = newItem.getText().toString();
-        EditText newAmount = findViewById(R.id.Amount);
-        String amountString = newAmount.getText().toString();
-        if (!thisMonth.equals("") && !thisDay.equals("") && !thisCategory.equals("")
-                && !amountString.equals("") && !itemString.equals("")) {
-            monthInt = Integer.parseInt(thisMonth);
-            dayInt = Integer.parseInt(thisDay);
-            categoryInt = Integer.parseInt(thisCategory);
-            amount = Double.parseDouble(amountString);
-            Expense expense = new Expense(monthInt, dayInt, categoryInt, itemString, amount);
-            updateSummary(expense);
-            expenseList.add(expense);
-            updateUI();
-            newItem.getText().clear();
-            newAmount.getText().clear();
-        }
-    }
-
-    private void updateUI() {
-        //add chunk
-        final LinearLayout itemLists = findViewById(R.id.items_list);
-        itemLists.removeAllViews();
-        for (final Expense expense : expenseList) {
-            View newItem = getLayoutInflater().inflate(R.layout.chunk_items,
-                    itemLists, false);
-            TextView itemName = newItem.findViewById(R.id.nameOfExpense);
-            TextView amount = newItem.findViewById(R.id.amount);
-            itemName.setText(expense.getItem());
-            amount.setText(Double.toString(expense.getAmount()));
-            itemLists.addView(newItem);
-            ((Spinner) newItem.findViewById(R.id.CategoryOfExpense)).setOnItemSelectedListener(new AdapterView
-                    .OnItemSelectedListener() {
+                thisCategory = category.getSelectedItem().toString(),
+                amountString = newAmount.getText().toString(),
+                item = newItem.getText().toString();
+        if (!amountString.equals("") && !item.equals("")) {
+            int monthInt = Integer.parseInt(thisMonth), dayInt = Integer.parseInt(thisDay),
+                    categoryInt = Integer.parseInt(thisCategory);
+            double amount = Double.parseDouble(amountString);
+            Expense expense = new Expense(monthInt, dayInt, categoryInt, item, amount);
+            month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(final AdapterView<?> parent, final View view,
+                                           final int position, final long id) {
+                    // Called when the user selects a different item in the dropdown
+                    // The position parameter is the selected index
+                    // The other parameters can be ignored
+                    expense.setMonth(position + 1);
+                }
+                @Override
+                public void onNothingSelected(final AdapterView<?> parent) {
+                }
+            });
+            day.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(final AdapterView<?> parent, final View view,
+                                           final int position, final long id) {
+                    // Called when the user selects a different item in the dropdown
+                    // The position parameter is the selected index
+                    // The other parameters can be ignored
+                    expense.setDay(position + 1);
+                }
+                @Override
+                public void onNothingSelected(final AdapterView<?> parent) {
+                }
+            });
+            category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(final AdapterView<?> parent, final View view,
                                            final int position, final long id) {
@@ -97,37 +96,32 @@ public class Record extends AppCompatActivity {
                 public void onNothingSelected(final AdapterView<?> parent) {
                 }
             });
-            ((Spinner) newItem.findViewById(R.id.CategoryOfExpense)).setSelection(expense.getCategory());
-            ((Spinner) newItem.findViewById(R.id.monthOfExpense)).setOnItemSelectedListener(new AdapterView
-                    .OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(final AdapterView<?> parent, final View view,
-                                           final int position, final long id) {
-                    // Called when the user selects a different item in the dropdown
-                    // The position parameter is the selected index
-                    // The other parameters can be ignored
-                    expense.setMonth(position);
-                }
-                @Override
-                public void onNothingSelected(final AdapterView<?> parent) {
-                }
-            });
-            ((Spinner) newItem.findViewById(R.id.monthOfExpense)).setSelection(expense.getMonth());
-            ((Spinner) newItem.findViewById(R.id.dayOfExpense)).setOnItemSelectedListener(new AdapterView
-                    .OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(final AdapterView<?> parent, final View view,
-                                           final int position, final long id) {
-                    // Called when the user selects a different item in the dropdown
-                    // The position parameter is the selected index
-                    // The other parameters can be ignored
-                    expense.setDay(position);
-                }
-                @Override
-                public void onNothingSelected(final AdapterView<?> parent) {
-                }
-            });
-            ((Spinner) newItem.findViewById(R.id.dayOfExpense)).setSelection(expense.getDay());
+            updateSummary(expense);
+            expenseList.add(expense);
+            updateUI();
+            newItem.getText().clear();
+            newAmount.getText().clear();
+        }
+    }
+
+    private void updateUI() {
+        //add chunk
+        LinearLayout itemLists = findViewById(R.id.items_list);
+        itemLists.removeAllViews();
+        for (Expense expense : expenseList) {
+            View newItem = getLayoutInflater().inflate(R.layout.chunk_items, itemLists,
+                    false);
+            TextView itemName = newItem.findViewById(R.id.nameOfExpense),
+                    amount = newItem.findViewById(R.id.amount),
+                    month = newItem.findViewById(R.id.monthOfExpense),
+                    day = newItem.findViewById(R.id.dayOfExpense),
+                    category = newItem.findViewById(R.id.CategoryOfExpense);
+            itemName.setText(expense.getItem());
+            amount.setText(Double.toString(expense.getAmount()));
+            month.setText(Integer.toString(expense.getMonth()));
+            day.setText(Integer.toString(expense.getDay()));
+            category.setText(Integer.toString(expense.getCategory()));
+            itemLists.addView(newItem);
             Button removeItem = newItem.findViewById(R.id.removeItem);
             removeItem.setOnClickListener(removedInvitee -> {
                 expenseList.remove(expense);
